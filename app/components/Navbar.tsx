@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Logo from "./Logo";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -12,23 +14,9 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-function Logo() {
-  return (
-    <Link
-      href="/"
-      aria-label="Nutri Next home"
-      className="flex flex-col font-extrabold uppercase leading-[0.85] tracking-wider text-white"
-    >
-      <span className="text-[19px]">Nutri</span>
-      <span className="pl-7 text-[19px]">
-        Ne<span className="italic">x</span>t
-      </span>
-    </Link>
-  );
-}
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="absolute inset-x-0 top-0 z-20">
@@ -40,7 +28,8 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-[15px] text-white/90 transition-colors hover:text-white"
+                aria-current={pathname === link.href ? "page" : undefined}
+                className="border-b border-transparent pb-1 text-[15px] text-white/90 transition-colors hover:text-white aria-[current=page]:border-white aria-[current=page]:text-white"
               >
                 {link.label}
               </Link>
@@ -77,6 +66,7 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
+                aria-current={pathname === link.href ? "page" : undefined}
                 onClick={() => setOpen(false)}
                 className="block rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/10 hover:text-white"
               >

@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     agentFeedback: true,
   },
   cacheComponents: true,
+  images: {
+    remotePatterns: [new URL("https://thenutrinext.com/wp-content/uploads/**")],
+  },
   partialPrefetching: true,
   turbopack: {
     rules: {

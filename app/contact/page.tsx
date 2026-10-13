@@ -157,13 +157,7 @@ export default function ContactPage() {
   const onBlur = (k: keyof Values) => () => setTouched((p) => ({ ...p, [k]: true }));
   const bind = (k: keyof Values) => ({ name: k, value: values[k], onChange, onBlur: onBlur(k), error: shown(k) });
 
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText("nutridrate@thenutridrate.com");
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {}
-  };
+
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -234,40 +228,10 @@ export default function ContactPage() {
                 </a>
               </InfoRow>
 
-              <InfoRow icon="mail" label="Email">
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <a href="mailto:nutridrate@thenutridrate.com" className="break-all text-lg font-medium underline-offset-4 hover:underline">
-                    nutridrate@thenutridrate.com
-                  </a>
-                  <button
-                    type="button"
-                    onClick={copyEmail}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-sm transition hover:bg-white/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <Icon name={copied ? "check" : "copy"} size={14} />
-                    <span aria-live="polite">{copied ? "Copied" : "Copy"}</span>
-                  </button>
-                </div>
-              </InfoRow>
+             
             </div>
 
-            <div className="mt-12 flex gap-3">
-              {[
-                { name: "instagram", label: "Instagram", href: "https://www.instagram.com/" },
-                { name: "whatsapp", label: "WhatsApp", href: "https://wa.me/" },
-              ].map((s) => (
-                <a
-                  key={s.name}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="grid h-12 w-12 place-items-center rounded-full bg-white text-[#0083c2] shadow-md transition hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-reduce:transition-none"
-                >
-                  <Icon name={s.name as keyof typeof paths} />
-                </a>
-              ))}
-            </div>
+           
           </aside>
 
           {/* Form panel */}
